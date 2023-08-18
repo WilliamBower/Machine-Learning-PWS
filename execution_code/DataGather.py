@@ -1,4 +1,4 @@
-from picamera import PiCamera
+from picamera2 import Picamera2
 import time
 import os
 
@@ -6,10 +6,11 @@ folder_location = "" #input folder path
 images = 0 #input image amount
 time_gaps = 0
 
-camera = PiCamera()
+camera = PiCamera2()
 camera.resolution(1920, 1080)
 
 def main():
+    print("Starting")
     #check for valid save location
     if os.path.isdir(folder_location) == False:
         os.mkdir(folder_location)
