@@ -51,7 +51,7 @@ def load_image(path):
     return image_array
 
 def create_model():
-    """model = tf.keras.models.Sequential([
+    model = tf.keras.models.Sequential([
         tf.keras.layers.Conv2D(
         32, (3, 3), activation="relu", input_shape = (IMG_WIDTH, IMG_HEIGHT, 3)
         ),
@@ -63,19 +63,7 @@ def create_model():
         tf.keras.layers.Dense(300, activation="relu"),
         tf.keras.layers.Dense(100, activation="relu"),
         tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
-    ])"""
-    inputs = tf.keras.Input(shape=(IMG_WIDTH, IMG_HEIGHT, 3))
-    x = tf.keras.layers.Conv2D(32, (3,3), activation="relu")(inputs)
-    x = tf.keras.layers.MaxPooling2D((2,2))(x)
-    x = tf.keras.layers.Flatten()(x)
-    x = tf.keras.layers.Dense(900, activation="relu")(x)
-    x = tf.keras.layers.Dropout(0.1)(x)
-    x = tf.keras.layers.Dense(600, activation="softplus")(x)
-    x = tf.keras.layers.Dense(300, activation="relu")(x)
-    x = tf.keras.layers.Dense(100, activation="relu")(x)
-    outputs = tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")(x)
-
-    model = tf.keras.Model(inputs=inputs, outputs=outputs)
+    ])
     
     model.compile(
         optimizer="adam",
