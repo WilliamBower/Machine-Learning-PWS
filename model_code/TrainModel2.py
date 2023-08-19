@@ -12,7 +12,7 @@ TEST_SIZE = 0.4
 
 def main():
     if len(sys.argv) not in [3, 4]:
-        sys.exit("Usage: python TrainedModel.py data_directory [model.h5]")
+        sys.exit("Usage: python TrainedModel.py data_directory save_location [model.h5]")
 
     images = []
     labels = []

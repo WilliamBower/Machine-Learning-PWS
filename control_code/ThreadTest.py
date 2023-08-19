@@ -1,7 +1,7 @@
 from threading import Thread
 import time
 
-def Network():
+def main1():
     for i in range(3):
         print(1)
         time.sleep(5)
