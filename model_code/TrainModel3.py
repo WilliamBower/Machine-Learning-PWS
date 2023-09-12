@@ -74,7 +74,7 @@ def load_image(path):
 def train_model(x_train, x_test, y_train, y_test):
     model = MyModel()
     loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-    optimizer = tf.keras.optimiziers.Adam()
+    optimizer = tf.keras.optimizers.Adam()
     train_loss = tf.keras.metrics.Mean(name="train_loss")
     train_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(name="train_accuracy")
     test_loss = tf.keras.metrics.Mean(name="test_loss")
