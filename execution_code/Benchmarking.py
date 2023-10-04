@@ -11,6 +11,9 @@ def main():
     from gpiozero import CPUTemperature
     cpu = CPUTemperature()
     temps = [cpu.temperature]
+    while 1:
+        if CPUTemperature.temperature < 34:
+            break
     start_time = timeit.default_timer()
     for i in range(iterations):
         run_model(model, image)
@@ -39,7 +42,9 @@ def load_image(path):
     return image_array
 
 def load_model(path):
-    return tf.saved_model.load(path)
+    model = tf.saved_model.load(path)
+    print(model.summary())
+    return model
 
 def run_model(model, data):
     return model(data)
