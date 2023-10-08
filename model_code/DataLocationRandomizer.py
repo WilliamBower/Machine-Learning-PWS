@@ -5,7 +5,7 @@ import os
 import BackgroundRandomizer
 
 #define settings
-Image_amount = 100
+Image_amount = 50
 Image_width = 1920
 Image_height = 1080
 
@@ -59,7 +59,7 @@ def GenerateImages(destination, base, randomized=False):
 def main():
     #define the path of where the images are being saved
     Image_save_location = "C:/Users/willi/Documents/GitHub/Machine-Learning-PWS/image_destination"
-    if os.path.isdir(Image_save_location):
+    if os.path.isdir(Image_save_location) == False:
         os.mkdir(Image_save_location)
         print("Base directory made")
     #define the images that are being pasted on the background
@@ -70,7 +70,7 @@ def main():
 
     #generate the images
     for i in range(len(base_locations)):
-        GenerateImages(f"{Image_save_location}/{i}", base_locations[i], randomized=True)
+        GenerateImages(f"{Image_save_location}/{i}", base_locations[i], randomized=False)
 
     dest = "C:/Users/willi/Documents/GitHub/Machine-Learning-PWS/image_destination"
     print("\nImages per folder:")
