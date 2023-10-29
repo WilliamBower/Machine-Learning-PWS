@@ -21,10 +21,17 @@ def load_image():
     img = np.array(img)
     return img
 
-def line_image(img):
+def line_image(img, parts):
     #crop image for line searching
     height, width = img.shape[0], img.shape[1]
-    img = img.copy()[(int(height*0.9)):height, (int(width/4)):(int(width/4*3))]
+    while True:
+        if (width/2/parts).is_integer():
+            width_size = width/2
+            break
+        else:
+            width_size = int(int(width/2/parts)*parts/2)
+
+    img = img.copy()[(int(height*0.9)):height, (int((width/2)-width_size)):(int((width/2)+width_size))]
     img = tf.image.rgb_to_grayscale(img)
     img = np.array(img)
     return img

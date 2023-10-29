@@ -11,7 +11,7 @@ model_interval = 0.5 #interval between model runs
 
 def locate_line(img):
     #crop image
-    line_img = image_operations.line_image(img)
+    line_img = image_operations.line_image(img, line_split)
 
     #find line pixels
     line_result = line_find.locate_line(line_img, line_split)
@@ -34,6 +34,7 @@ def main():
     middle_line = math.floor(line_split/2)
     last_line_time = timeit.timeit()
     last_model_time = timeit.timeit()
+    current_speed = 1
     print()
     while True:
         img = image()
@@ -46,22 +47,35 @@ def main():
             if line_result == middle_line:
                 #line is in middle of frame
                 print("Line is centred")
-                motor_operations.leaphy.straight()
+                motor_operations.leaphy.straight(current_speed)
             elif line_result < middle_line:
                 #line is left of centre
                 perc = 1/(line_result+1)
                 print(f"Line is left, {perc} angle")
-                motor_operations.leaphy.l_turn(perc)
+                motor_operations.leaphy.l_turn(perc, current_speed)
             elif line_result > middle_line:
                 #line is right of centre
-                perc = 1/abs(line_result-line_split)
+                perc = 1/(line_split-line_result)
                 print(f"Line is right, {perc} angle")
-                motor_operations.leaphy.r_turn(perc)
+                motor_operations.leaphy.r_turn(perc, current_speed)
             print()
         if timeit.timeit() - last_model_time >= model_interval:
             print("Running model")
-            #model_result = run_model()
-            #change motors
+            """
+            Model:
+            0 | Nothing
+            1 | 50
+            2 | 100
+            """
+
+            """
+            model_result = run_model()
+            if model_result == 1:
+                current_speed = 0.5
+            elif model_result == 2:
+                current_speed = 1
+            """
+
             print()
 
 if __name__ == "__main__":
