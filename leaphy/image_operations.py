@@ -1,6 +1,7 @@
 from picamera2 import Picamera2
 import numpy as np
 import tensorflow as tf
+from PIL import Image
 
 def setup_camera():
     camera = Picamera2()
@@ -18,6 +19,7 @@ def load_image():
     #load picture into memory and format
     img = tf.io.read_file("input_image.jpg")
     img = tf.image.decode_jpeg(img)
+    img = img.rotate(180)
     img = np.array(img)
     return img
 
@@ -39,9 +41,8 @@ def line_image(img, parts):
 def model_image(img, compression):
     #crop and resize image for model execution
     height, width = img.shape[0], img.shape[1]
-    width /= compression
-    height /= compression
     img = img.copy()
+    img = img[0:height, (int(width/2)):width]
     img = img.reshape(width/2, height, 3)
     img = np.array(img)[np.newaxis,...]
     return img
