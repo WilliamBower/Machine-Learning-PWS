@@ -7,7 +7,7 @@ def locate_line(img, parts):
     results = []
     for i in range(parts):
         #select part of image
-        step1 = img.copy()[0:height, (int(width/parts*i)):(int(width/3*(i+1)))]
+        step1 = img.copy()[0:height, (int(width/parts*i)):(int(width/parts*(i+1)))]
 
         #count pixels below threshold
         step2 = np.sum(step1 <= threshold)
