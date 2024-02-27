@@ -11,9 +11,6 @@ def main():
     from gpiozero import CPUTemperature
     cpu = CPUTemperature()
     temps = [cpu.temperature]
-    while 1:
-        if CPUTemperature.temperature < 34:
-            break
     start_time = timeit.default_timer()
     for i in range(iterations):
         run_model(model, image)

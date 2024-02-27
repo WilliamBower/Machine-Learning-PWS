@@ -50,7 +50,7 @@ def line_thread(img):
         perc = 1/(line_result+1)
         motor_operations.leaphy.l_turn(perc, current_speed)
     elif line_result > middle_line and motor_active:
-        perc = 1/(line_split-line_result)
+        perc = 1/abs(line_split-line_result)
         motor_operations.leaphy.r_turn(perc, current_speed)
 
 def model_thread(img):
